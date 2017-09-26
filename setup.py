@@ -1,7 +1,18 @@
 from distutils.core import setup
 
+
+try:
+    # noinspection PyPackageRequirements
+    from pypandoc import convert
+    read_md = lambda f: convert(f, 'rst')
+except ImportError:
+    print("warning: pypandoc not found, could not convert Markdown to RST")
+    read_md = lambda f: open(f, 'r').read()
+
+
 setup(
     name='django_prepared_queries',
+    long_description=read_md('README.md'),
     version='0.1',
     packages=['django_pq'],
     url='https://github.com/rutube/django_prepared_queries',
