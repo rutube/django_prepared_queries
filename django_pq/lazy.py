@@ -141,10 +141,10 @@ class LazyContext(object):
     instance = None
 
     def __init__(self, *args, **params):
-        self.kwargs = params.copy()
+        kwargs = params.copy()
         for norm in args:
-            for k, v in self.kwargs.items():
-                norm(k, v, self.kwargs)
+            kwargs = norm(kwargs)
+        self.kwargs = kwargs
         self.__prev_instance = None
         self.values_allowed = False
 
