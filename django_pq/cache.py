@@ -128,12 +128,12 @@ class LazySubstitute(object):
         """ Checks that real and lazy results are equivalent."""
         sql1, params1 = normalize(first)
         sql2, params2 = normalize(second)
-        if sql1 != sql2:
+        if sql1 != sql2:  # pragma: no cover
             self.logger.error(
                 "[PQ] %s:\n%s" % (message, '\n'.join(
                     (sql1, sql2))))
             raise SqlMappingFailed(sql1, sql2)
-        if params1 != params2:
+        if params1 != params2:  # pragma: no cover
             self.logger.error(
                 "[PQ] %s:\n%s" % (message, '\n'.join(
                     (sql1, repr(params1), repr(params2)))))
@@ -157,7 +157,7 @@ class LazySubstitute(object):
 
         sql, params = lazy
 
-        raw_qs = RawQuerySet(sql, params=params, model=real_qs.model)
+        raw_qs = RawQuerySet(sql, params=params, model=lazy_qs.model)
 
         cache[cache_key] = raw_qs
         return raw_qs
@@ -169,10 +169,8 @@ class LazySubstitute(object):
         Returns a copy of cached queryset with SQL query normalized respecting
         current actual parameters values.
         """
-        # noinspection PyUnresolvedReferences
         sql, params = normalize(qs.raw_query, qs.params)
 
-        # noinspection PyUnresolvedReferences
         return RawQuerySet(sql, model=qs.model, params=params)
 
     def do_call(self, this, **kwargs):
@@ -201,10 +199,9 @@ class LazySubstitute(object):
                               (self._func_repr, signature, cache_key))
             # computing native queryset if check before cache flag is active.
             if self.check:
-                if self.DEBUG:
-                    real_qs = expected_qs
-                else:
-                    real_qs = self.get_native_queryset(this, **kwargs)
+                # check is forced in __init__ by debug value so real_sq is
+                # already computed above.
+                real_qs = expected_qs
             else:
                 # check before cache is disabled
                 real_qs = None
@@ -216,7 +213,9 @@ class LazySubstitute(object):
                 raw_qs = self.cache_result(cache, cache_key, lazy, real_qs)
                 # returning RawQuerySet
                 return self.get_normalized_queryset(raw_qs)
-            except MappingFailed:
+            except MappingFailed:  # pragma: no cover
+                if self.DEBUG:
+                    raise
                 # check before cache failed, returning native queryset.
                 return real_qs
 
@@ -228,10 +227,8 @@ class LazySubstitute(object):
             # check if cached version with actual parameters and native result
             # are equal
 
-            # noinspection PyUnresolvedReferences
             cached = (normalized_qs.raw_query, normalized_qs.params)
             self.assert_equivalent(cached, expected,
                                    'Cached result does not match real')
-        if self.DEBUG:
             self.logger.debug("Used cached result for %s" % self._func_repr)
         return normalized_qs
