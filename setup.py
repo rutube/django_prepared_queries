@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 
 
 try:
@@ -20,5 +20,5 @@ setup(
     author='Tumbler',
     author_email='zimbler@bk.ru',
     description='Caches SQL queries built with Django ORM',
-    setup_requires=['typing', 'Django>=1.8,<2.0']
+    install_requires=['typing', 'Django>=1.8,<2.0']
 )
