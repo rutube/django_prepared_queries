@@ -13,7 +13,7 @@ except ImportError:
 setup(
     name='django_prepared_queries',
     long_description=read_md('README.md'),
-    version='0.1',
+    version='0.2.1',
     packages=['django_pq'],
     url='https://github.com/rutube/django_prepared_queries',
     license='Beer license',
