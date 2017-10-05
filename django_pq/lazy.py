@@ -32,7 +32,8 @@ class Lazy(Promise):
             key = key._Lazy__key
         self.__key = key
 
-    def _prepare(self):
+    # noinspection PyUnusedLocal
+    def _prepare(self, output_field=None):
         """
         Called in Field.get_prep_lookup to prevent revealing real values.
         """
@@ -113,7 +114,7 @@ class IntLazy(Lazy, int):
 
     def __new__(cls, key):
         """ int(lazy)"""
-        # noinspection PyTypeChecker
+        # noinspection PyArgumentList
         new = int.__new__(cls, 0)
         new.__init__(key)
         return new
