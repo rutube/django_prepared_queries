@@ -26,6 +26,7 @@ install:
 
 # command to run tests
 script:
+    - python setup.py install .
     - python -m coverage run testproject/manage.py test -v3
 
 after_success: codecov
