@@ -105,7 +105,7 @@ class Lazy(Promise):
     _proxy____cast = reveal
 
 
-class UnicodeLazy(Lazy, unicode):
+class UnicodeLazy(Lazy, six.text_type):
     pass
 
 
