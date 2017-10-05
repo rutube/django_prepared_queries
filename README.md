@@ -4,6 +4,7 @@ Django Prepared Queries
 [![PyPI version](https://badge.fury.io/py/django_prepared_queries.svg)](https://badge.fury.io/py/django_prepared_queries)
 [![codecov](https://codecov.io/gh/rutube/django_prepared_queries/branch/master/graph/badge.svg)](https://codecov.io/gh/rutube/django_prepared_queries)
 [![Build Status](https://travis-ci.org/rutube/django_prepared_queries.svg)](https://travis-ci.org/rutube/django_prepared_queries)
+
 `django_pq` allows to cache SQL generated with Django ORM and reuse cached 
 queries with only substituting new parameters values.
 
