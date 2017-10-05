@@ -1,6 +1,7 @@
 # coding: utf-8
 from datetime import datetime
 
+import six
 from django.conf import settings
 from django.db import models
 from django.utils.functional import Promise
@@ -56,7 +57,7 @@ class Lazy(Promise):
     def __unicode__(self):
         # preserving Lazy when casting to unicode
         if LazyContext.instance.values_allowed:
-            return unicode(self.reveal())
+            return six.text_type(self.reveal())
         return UnicodeLazy(self.__key)
 
     @property

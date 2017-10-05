@@ -20,5 +20,5 @@ setup(
     author='Tumbler',
     author_email='zimbler@bk.ru',
     description='Caches SQL queries built with Django ORM',
-    install_requires=['typing', 'Django>=1.8,<2.0']
+    install_requires=['typing', 'Django>=1.8,<2.0', 'six']
 )
