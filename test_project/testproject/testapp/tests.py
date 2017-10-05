@@ -1,7 +1,7 @@
 import mock
 from django.test import TestCase
 
-from models import TestModel, run_cached
+from testproject.testapp.models import TestModel, run_cached
 
 
 # noinspection PyUnusedLocal
@@ -22,7 +22,7 @@ class CacheTestCase(TestCase):
         x = run_cached(integers=[1])
         self.assertEqual(x, self.t1)
 
-    @mock.patch('testapp.models.TestManager.ftm_decorator.DEBUG',
+    @mock.patch('testproject.testapp.models.TestManager.ftm_decorator.DEBUG',
                 new_callable=mock.PropertyMock(return_value=False))
     def test_run_disable_debug(self, *args):
         x = run_cached(integers=[1])
@@ -33,9 +33,9 @@ class CacheTestCase(TestCase):
             x = run_cached(integers=[1])
             self.assertEqual(x, self.t1)
 
-    @mock.patch('testapp.models.TestManager.ftm_decorator.check',
+    @mock.patch('testproject.testapp.models.TestManager.ftm_decorator.check',
                 new_callable=mock.PropertyMock(return_value=False))
-    @mock.patch('testapp.models.TestManager.ftm_decorator.DEBUG',
+    @mock.patch('testproject.testapp.models.TestManager.ftm_decorator.DEBUG',
                 new_callable=mock.PropertyMock(return_value=False))
     def test_run_disable_check(self, *args):
         x = run_cached(integers=[1])
