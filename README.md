@@ -112,8 +112,8 @@ usefull for proper caching.
 5. Don't pass empty lists as parameter values. Django ORM checks it for 
 emptiness and removes empty lookups from WhereNode (with respect of boolean 
 algebra rules). Pass `None` instead.
-6. Don't use and volatile values like `datetime.now() `in queryset filtering;
-Pass it as a parameter instead.
+6. Don't use any volatile values like `datetime.now() `in queryset filtering;
+pass it as a parameter instead.
 7. Test your code with 100% branch coverage *before* adding caching.
 
 Normalize parameters
