@@ -13,12 +13,12 @@ except ImportError:
 setup(
     name='django_prepared_queries',
     long_description=read_md('README.md'),
-    version='0.2.1',
+    version='0.3.0',
     packages=['django_pq'],
     url='https://github.com/rutube/django_prepared_queries',
     license='Beer license',
     author='Tumbler',
     author_email='zimbler@bk.ru',
     description='Caches SQL queries built with Django ORM',
-    install_requires=['typing', 'Django>=1.8,<2.0', 'six']
+    install_requires=['typing', 'Django>=1.8,<2.2', 'six']
 )
