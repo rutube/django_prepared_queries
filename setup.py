@@ -1,19 +1,13 @@
 from setuptools import setup
 
-
-try:
-    # noinspection PyPackageRequirements
-    from pypandoc import convert
-    read_md = lambda f: convert(f, 'rst')
-except ImportError:
-    print("warning: pypandoc not found, could not convert Markdown to RST")
-    read_md = lambda f: open(f, 'r').read()
-
+with open('README.md') as f:
+    long_description = f.read()
 
 setup(
     name='django_prepared_queries',
-    long_description=read_md('README.md'),
-    version='0.3.0',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    version='0.3.1',
     packages=['django_pq'],
     url='https://github.com/rutube/django_prepared_queries',
     license='Beer license',
